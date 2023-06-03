@@ -14,7 +14,7 @@ app.get("/capital/:country", (req, res) => {
   } else if (country == "Spain") {
     res.json({ Madrid: country });
   } else {
-    res.sendDate();
+    res.send("안녕하세요");
   }
 });
 
