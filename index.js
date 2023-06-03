@@ -1,20 +1,23 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const port = 3000;
 
+app.use(cors()); //cors 모듈 사용 : 공식 홈페이지 참고
+
 app.get("/capital/:country", (req, res) => {
   const { country } = req.params;
-  console.log(country);
+  console.log(country, "js");
   if (country == "Korea") {
-    res.json({ Seroul: country });
+    res.json({ country: "Seoul" });
   } else if (country == "Nepal") {
-    res.json({ Katmandu: country });
+    res.json({ country: "Katmandu" });
   } else if (country == "Germany") {
-    res.json({ Berlin: country });
+    res.json({ country: "Berlin" });
   } else if (country == "Spain") {
-    res.json({ Madrid: country });
+    res.json({ country: "Madrid" });
   } else {
-    res.send("안녕하세요");
+    res.json({ country: "알 수 없음" });
   }
 });
 
