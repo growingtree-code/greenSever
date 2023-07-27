@@ -7,7 +7,7 @@ app.use(cors()); //cors 모듈 사용 : 공식 홈페이지 참고
 
 app.get("/capital/:country", (req, res) => {
   const { country } = req.params;
-  console.log(country, "js");
+  // console.log(country, "js"); // ex)test시 해당 라인 주석처리할것 http://localhost:3000/capital/Nepal
   if (country == "Korea") {
     res.json({ country: "Seoul" });
   } else if (country == "Nepal") {
