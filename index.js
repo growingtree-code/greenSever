@@ -41,6 +41,37 @@ app.get("/list", async (req, res) => {
   }
 });
 
+app.put("/update/:idx", async (req, res) => {
+  try {
+    const { idx } = req.params;
+    const { content } = req.body;
+    console.log(idx, content);
+    const conn = await pool.getConnection();
+    const sql = "update todotable set content=? where idx=?";
+    const data = [content, idx];
+    const [rows] = await pool.query(sql, data);
+    res.status(200).json({ result: rows });
+    conn.release();
+  } catch (error) {
+    console.log("update에러", error);
+  }
+});
+
+app.delete("/delete/:idx", async (req, res) => {
+  try {
+    const { idx } = req.params;
+    console.log(idx, "번삭제");
+    const conn = await pool.getConnection();
+    const sql = "DELETE FROM todotable WHERE idx = ?";
+    const data = [idx];
+    const [rows] = await pool.query(sql, data);
+    res.status(200).json({ result: rows });
+    conn.release();
+  } catch (error) {
+    console.log("delete에러", error);
+  }
+});
+
 app.get("/capital/:country", (req, res) => {
   const { country } = req.params;
   // console.log(country, "js"); // ex)test시 해당 라인 주석처리할것 http://localhost:3000/capital/Nepal
